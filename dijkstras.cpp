@@ -19,7 +19,6 @@ public:
 
 class Graph {
     vector<Vertex> vertices;
-    vector<Edge> edges;
 
 public:
     Graph(int size) {
@@ -32,7 +31,6 @@ public:
     void addEdge(int from, int to, int weight) {
         Vertex* fromVertex = &vertices[from];
         Vertex* toVertex = &vertices[to];
-        edges.emplace_back(toVertex, weight);
         fromVertex->edges.push_back(Edge(toVertex, weight));
         toVertex->edges.push_back(Edge(fromVertex, weight));
     }
