@@ -13,7 +13,7 @@ public:
 class Vertex {
 public:
     int id;
-    vector<Edge> neighbours;
+    vector<Edge> edges;
     Vertex(int _id) : id(_id) {}
 };
 
@@ -33,8 +33,8 @@ public:
         Vertex* fromVertex = &vertices[from];
         Vertex* toVertex = &vertices[to];
         edges.emplace_back(toVertex, weight);
-        fromVertex->neighbours.push_back(Edge(toVertex, weight));
-        toVertex->neighbours.push_back(Edge(fromVertex, weight));
+        fromVertex->edges.push_back(Edge(toVertex, weight));
+        toVertex->edges.push_back(Edge(fromVertex, weight));
     }
 
     vector<int> dijkstra(int start) {
@@ -52,7 +52,7 @@ public:
                 continue;
             }
 
-            for (const Edge& edge : vertices[currVertexId].neighbours) {
+            for (const Edge& edge : vertices[currVertexId].edges) {
                 int newDist = currDist + edge.weight;
                 if (newDist < dist[edge.targetVertex->id]) {
                     dist[edge.targetVertex->id] = newDist;
